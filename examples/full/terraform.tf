@@ -5,5 +5,9 @@ terraform {
       source  = "opentelekomcloud/opentelekomcloud"
       version = ">= 1.36.35"
     }
+    tls = {
+      source  = "hashicorp/tls"
+      version = "~> 4.0"
+    }
   }
 }
