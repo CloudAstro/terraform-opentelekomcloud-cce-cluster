@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/CloudAstro/terraform-opentelekomcloud-cce-cluster/compare/v1.0.0...v1.1.0) (2026-06-23)
+
+
+### Features
+
+* adjust cce structure, add node-attach resources and computed-config block ([d5ab886](https://github.com/CloudAstro/terraform-opentelekomcloud-cce-cluster/commit/d5ab886c79ade66ed52e0d1633e436ae81377562))
+
 ## 1.0.0 (2025-09-09)
 
 
