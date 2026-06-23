@@ -555,3 +555,49 @@ delete_all_network = "true"
 ```
 DESCRIPTION
 }
+
+
+variable "component_configurations" {
+  type = map(object({
+    name = string
+    configurations = optional(list(object({
+      name  = string
+      value = string
+    })))
+  }))
+  default     = null
+  description = <<DESCRIPTION
+The `component_configurations` - (Optional, List) Specifies the kubernetes component configurations.
+For details, see [documentation](https://docs.otc.t-systems.com/cloud-container-engine/umn/clusters/managing_clusters/modifying_cluster_configurations.html#cce-10-0213).
+* `name` - (Required, String) Specifies the component name.
+* `configurations` - (Optional, List) Specifies object of the component configurations. 
+
+The `configurations` block supports:
+  * `name` - (Required, String) Specifies the component name.
+  * `value` - (Required, String) Specifies value of the component.
+  If you specify a component or parameter that is not supported, this configuration item will be ignored.
+
+Example input:
+```
+component_configurations = {
+  kube-apiserver = {
+    name = "kube-apiserver"
+    configurations = [{
+      name  = "support-overload"
+      value = "true"
+    }]
+  }
+}
+
+component_configurations = {
+  eni = {
+    name = "eni"
+    configurations = [{
+      name  = "dataplane-v2"
+      value = "true"
+    }]
+  }
+}
+```
+DESCRIPTION
+}

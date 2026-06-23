@@ -1,5 +1,6 @@
 resource "opentelekomcloud_cce_node_v3" "this" {
-  for_each                   = var.nodes != null ? var.nodes : {}
+  for_each = var.nodes != null ? var.nodes : {}
+
   cluster_id                 = opentelekomcloud_cce_cluster_v3.cluster.id
   flavor_id                  = each.value.flavor_id
   availability_zone          = each.value.availability_zone
@@ -58,5 +59,14 @@ resource "opentelekomcloud_cce_node_v3" "this" {
       extend_params = data_volumes.value.extend_params
       kms_id        = data_volumes.value.kms_id
     }
+  }
+
+  lifecycle {
+    ignore_changes = [
+      k8s_tags["cce.cloud.com/cce-nodepool-id"],
+      billing_mode,
+      region,
+      tags,
+    ]
   }
 }

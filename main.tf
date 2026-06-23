@@ -53,4 +53,21 @@ resource "opentelekomcloud_cce_cluster_v3" "cluster" {
       availability_zone = masters.value.availability_zone
     }
   }
+
+  dynamic "component_configurations" {
+    for_each = var.component_configurations != null ? var.component_configurations : {}
+
+    content {
+      name = component_configurations.value.name
+
+      dynamic "configurations" {
+        for_each = component_configurations.value.configurations != null ? component_configurations.value.configurations : []
+
+        content {
+          name  = configurations.value.name
+          value = configurations.value.value
+        }
+      }
+    }
+  }
 }
